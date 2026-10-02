@@ -1,0 +1,44 @@
+{
+  "name": "fleet-test-ops",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "db:migrate": "tsx database/migrate.ts",
+    "db:seed": "tsx database/seed.ts",
+    "db:reset-demo": "tsx database/reset-demo.ts --confirm-demo-data-reset",
+    "test:contracts": "vitest run packages/contracts/test",
+    "test:db": "vitest run database/test",
+    "test:api": "vitest run apps/api/test",
+    "test:web": "vitest run apps/web/src",
+    "test": "vitest run",
+    "typecheck": "tsc -p tsconfig.json && npm run typecheck --workspaces --if-present",
+    "lint": "eslint . --max-warnings=0",
+    "build": "npm run build -w @fleet/contracts && npm run build -w @fleet/api && npm run build -w @fleet/web",
+    "dev": "concurrently -k \"npm run dev -w @fleet/api\" \"npm run dev -w @fleet/web\"",
+    "start": "node --env-file=.env apps/api/dist/server.js",
+    "test:e2e": "playwright test"
+  },
+  "devDependencies": {
+    "@eslint/js": "10.0.1",
+    "@types/node": "26.6.4",
+    "@types/pg": "8.23.1",
+    "concurrently": "10.0.5",
+    "eslint": "10.11.0",
+    "tsup": "8.5.1",
+    "tsx": "4.23.15",
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.71.0",
+    "vitest": "5.0.3"
+  },
+  "dependencies": {
+    "pg": "8.23.1"
+  }
+}
