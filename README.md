@@ -125,13 +125,13 @@ npm run test:smoke
 
 Integration tests create/drop isolated schemas; the role needs schema creation privileges. Browser tests start their own API/web on ports 3002/5174, wait for readiness, verify SQL persistence, and clean up their schema. The production smoke test starts the compiled server on port 3003 and checks HTML navigation, JSON errors, and actual built assets.
 
-See [verification evidence](docs/verification.md). Local verification and automated review are recorded there; the GitHub workflow has not run on a remote repository.
+See [verification evidence](docs/verification.md) for local checks and automated review. Consult [GitHub Actions](https://github.com/Calista0429/fleet-test-ops/actions) for the latest hosted check results.
 
 ## Development evidence
 
 The [GitHub workflow record](docs/github-workflow.md) contains actual feature commits and their checks. Business requirement/bug forms and a PR template are in `.github`; CI checks formatting, types, lint, PostgreSQL tests, build, browser workflows, and production serving. Actions are pinned to verified release commits.
 
-This is solo development. Automated review is identified as automated. A remote repository was not supplied, so no GitHub Issue, PR, hosted CI success, or live deployment is claimed.
+This is solo development. Automated review is identified as automated. The public source repository is [Calista0429/fleet-test-ops](https://github.com/Calista0429/fleet-test-ops). GitHub Issues and PRs have not been created yet; no live application deployment is claimed.
 
 ## Scope and limitations
 

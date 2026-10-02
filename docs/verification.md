@@ -63,6 +63,12 @@ On 2026-10-02, the user requested removal of the lower-left portfolio label and 
 
 The production build, lint, and formatting checks passed. Both README switch directions were exercised in a local Markdown preview; images loaded, local link targets exist, and both SVG controls parse as valid XML. The running production UI no longer displays the sidebar label, and the desktop documentation screenshots were refreshed. This follow-up changes presentation and documentation; the earlier 94-test and three-workflow record above describes the verified application behavior before this refinement.
 
+## Main branch and public repository
+
+At the user's request on 2026-10-02, `main` was fast-forwarded to the complete implementation and presentation refinement (`ff7d65c`). A clean dependency installation, all 94 tests, the production build, and compiled-server smoke passed from the main checkout. Runtime environment files and private keys are absent from tracked files and history.
+
+The user authorized creation of [Calista0429/fleet-test-ops](https://github.com/Calista0429/fleet-test-ops). GitHub metadata confirms the repository is public. Hosted checks run through the committed workflow; consult the actual [Actions results](https://github.com/Calista0429/fleet-test-ops/actions) for their latest status.
+
 ## Limits of this evidence
 
-Docker startup, remote GitHub Issues/PRs, hosted CI, and public deployment were not executed. The Docker/CI configurations and collaboration templates are ready for review. Architecture HTML and static SVG rendering were checked; automated PNG/PDF download capture was unavailable, so export download success is not claimed.
+Docker startup, remote GitHub Issues/PRs, and live application deployment were not executed. The Docker configuration and collaboration templates are prepared. The local checks do not establish a hosted CI result; the Actions link above provides that separate evidence. Architecture HTML and static SVG rendering were checked; automated PNG/PDF download capture was unavailable, so export download success is not claimed.

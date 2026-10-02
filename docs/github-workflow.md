@@ -9,7 +9,7 @@ This is a solo portfolio project. The repository contains real implementation mi
 | `e18c5a3` | React overview and vehicle history                                | 82 tests; desktop/narrow UI, request race, retry, saved status after reload |
 | `bef0f97` | Issue creation, triage, resolution, reopening                     | 91 tests and 3 isolated Chromium workflows; SQL persistence checks          |
 
-The feature branch is `codex/fleet-test-ops`. The development process followed test-first behavior checks and separate feature commits, rather than a single initial application commit.
+Implementation used the `codex/fleet-test-ops` feature branch, test-first behavior checks, and separate feature commits. At the user's request, `main` was fast-forwarded to the completed branch and all 94 tests, the production build, and serving smoke test passed on that checkout.
 
 ## Prepared workflow
 
@@ -25,4 +25,4 @@ The workflow installs dependencies, checks formatting/types/lint, runs PostgreSQ
 
 Actions are pinned to release commits verified against the official repositories on 2026-10-02: [checkout v7.0.1](https://github.com/actions/checkout/releases/tag/v7.0.1), [setup-node v7.0.0](https://github.com/actions/setup-node/releases/tag/v7.0.0), and [upload-artifact v7.0.1](https://github.com/actions/upload-artifact/releases/tag/v7.0.1).
 
-No GitHub remote destination was supplied. These are local workflow artifacts; no remote Issue, PR, hosted CI run, or deployment is claimed. The final automated review and verification record are documented in `verification.md` after they run.
+The user selected [Calista0429/fleet-test-ops](https://github.com/Calista0429/fleet-test-ops) as the public repository. The source branch is `main`; actual hosted results are available in [GitHub Actions](https://github.com/Calista0429/fleet-test-ops/actions). Remote Issues/PRs and live deployment have not been performed. Local verification and the independent automated review are recorded in `verification.md`.
