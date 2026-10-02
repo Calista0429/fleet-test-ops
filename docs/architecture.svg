@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 700" role="img" aria-labelledby="architecture-title architecture-description" style="font-family:'JetBrains Mono',monospace">
+<title id="architecture-title">Fleet Test Operations planned architecture</title>
+<desc id="architecture-description">A test coordinator uses a React and TypeScript web app. The web app calls an Express API, which queries PostgreSQL. Shared validation contracts and migrations support these components. A separate development workflow uses GitHub Issues, pull requests, and automated checks.</desc>
+<defs>
+  <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#64748b"/></marker>
+  <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1e293b" stroke-width="0.5"/></pattern>
+</defs>
+<rect width="1000" height="700" rx="12" fill="#020617"/>
+<rect width="1000" height="700" fill="url(#grid)"/>
+<text x="40" y="40" fill="white" font-size="16" font-weight="700">Fleet Test Operations</text>
+<text x="40" y="61" fill="#94a3b8" font-size="9">Planned MVP · React + TypeScript · Express · PostgreSQL</text>
+<!-- Connections precede all opaque component backgrounds. -->
+<path d="M 180 295 H 258" fill="none" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+<path d="M 440 295 H 508" fill="none" stroke="#22d3ee" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+<path d="M 680 295 H 748" fill="none" stroke="#a78bfa" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+<path d="M 495 200 V 220 H 350 V 248" fill="none" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4,4" marker-end="url(#arrowhead)"/>
+<path d="M 595 200 V 248" fill="none" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4,4" marker-end="url(#arrowhead)"/>
+<path d="M 835 200 V 248" fill="none" stroke="#a78bfa" stroke-width="1.5" stroke-dasharray="4,4" marker-end="url(#arrowhead)"/>
+<path d="M 440 540 H 508" fill="none" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+<path d="M 680 540 H 748" fill="none" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+<!-- Runtime and development boundaries do not imply a cloud provider. -->
+<rect x="230" y="100" width="720" height="310" rx="12" fill="none" stroke="#94a3b8" stroke-width="1" stroke-dasharray="8,4"/>
+<text x="248" y="122" fill="#cbd5e1" font-size="10" font-weight="600">APPLICATION · LOCAL DEVELOPMENT / SAME-ORIGIN BUILD</text>
+<rect x="230" y="455" width="720" height="150" rx="12" fill="none" stroke="#94a3b8" stroke-width="1" stroke-dasharray="8,4"/>
+<text x="248" y="480" fill="#cbd5e1" font-size="10" font-weight="600">GITHUB DEVELOPMENT WORKFLOW · SEPARATE FROM RUNTIME</text>
+<g><rect x="40" y="250" width="140" height="90" rx="6" fill="#0f172a"/><rect x="40" y="250" width="140" height="90" rx="6" fill="rgba(30, 41, 59, 0.5)" stroke="#94a3b8" stroke-width="1.5"/><text x="110" y="274" fill="white" font-size="12" font-weight="600" text-anchor="middle">Test coordinator</text><text x="110" y="294" fill="#94a3b8" font-size="9" text-anchor="middle">Fleet availability</text><text x="110" y="309" fill="#94a3b8" font-size="9" text-anchor="middle">Incident follow-up</text></g><g><rect x="260" y="250" width="180" height="90" rx="6" fill="#0f172a"/><rect x="260" y="250" width="180" height="90" rx="6" fill="rgba(8, 51, 68, 0.4)" stroke="#22d3ee" stroke-width="1.5"/><text x="350" y="274" fill="white" font-size="12" font-weight="600" text-anchor="middle">Web application</text><text x="350" y="294" fill="#94a3b8" font-size="9" text-anchor="middle">React · TypeScript · Vite</text><text x="350" y="309" fill="#94a3b8" font-size="9" text-anchor="middle">Overview / Vehicles / Issues</text><text x="350" y="324" fill="#94a3b8" font-size="9" text-anchor="middle">Charts · tables · forms</text></g><g><rect x="510" y="250" width="170" height="90" rx="6" fill="#0f172a"/><rect x="510" y="250" width="170" height="90" rx="6" fill="rgba(6, 78, 59, 0.4)" stroke="#34d399" stroke-width="1.5"/><text x="595" y="274" fill="white" font-size="12" font-weight="600" text-anchor="middle">REST API</text><text x="595" y="294" fill="#94a3b8" font-size="9" text-anchor="middle">Express · TypeScript</text><text x="595" y="309" fill="#94a3b8" font-size="9" text-anchor="middle">Validated requests</text><text x="595" y="324" fill="#94a3b8" font-size="9" text-anchor="middle">Parameterized SQL</text></g><g><rect x="750" y="250" width="170" height="90" rx="6" fill="#0f172a"/><rect x="750" y="250" width="170" height="90" rx="6" fill="rgba(76, 29, 149, 0.4)" stroke="#a78bfa" stroke-width="1.5"/><text x="835" y="274" fill="white" font-size="12" font-weight="600" text-anchor="middle">PostgreSQL</text><text x="835" y="294" fill="#94a3b8" font-size="9" text-anchor="middle">vehicles · test_runs · issues</text><text x="835" y="309" fill="#94a3b8" font-size="9" text-anchor="middle">Constraints · indexes</text><text x="835" y="324" fill="#94a3b8" font-size="9" text-anchor="middle">Persistent records</text></g><g><rect x="440" y="140" width="240" height="60" rx="6" fill="#0f172a"/><rect x="440" y="140" width="240" height="60" rx="6" fill="rgba(30, 41, 59, 0.5)" stroke="#94a3b8" stroke-width="1.5"/><text x="560" y="164" fill="white" font-size="12" font-weight="600" text-anchor="middle">Shared contracts</text><text x="560" y="184" fill="#94a3b8" font-size="9" text-anchor="middle">TypeScript types + Zod validation</text></g><g><rect x="740" y="140" width="190" height="60" rx="6" fill="#0f172a"/><rect x="740" y="140" width="190" height="60" rx="6" fill="rgba(76, 29, 149, 0.4)" stroke="#a78bfa" stroke-width="1.5"/><text x="835" y="164" fill="white" font-size="12" font-weight="600" text-anchor="middle">Database lifecycle</text><text x="835" y="184" fill="#94a3b8" font-size="9" text-anchor="middle">SQL migrations + sample seed</text></g><g><rect x="260" y="510" width="180" height="60" rx="6" fill="#0f172a"/><rect x="260" y="510" width="180" height="60" rx="6" fill="rgba(30, 41, 59, 0.5)" stroke="#94a3b8" stroke-width="1.5"/><text x="350" y="534" fill="white" font-size="12" font-weight="600" text-anchor="middle">Issues + branches</text><text x="350" y="554" fill="#94a3b8" font-size="9" text-anchor="middle">Business goals + acceptance</text></g><g><rect x="510" y="510" width="170" height="60" rx="6" fill="#0f172a"/><rect x="510" y="510" width="170" height="60" rx="6" fill="rgba(30, 41, 59, 0.5)" stroke="#94a3b8" stroke-width="1.5"/><text x="595" y="534" fill="white" font-size="12" font-weight="600" text-anchor="middle">Pull requests</text><text x="595" y="554" fill="#94a3b8" font-size="9" text-anchor="middle">Focused changes + evidence</text></g><g><rect x="750" y="510" width="170" height="60" rx="6" fill="#0f172a"/><rect x="750" y="510" width="170" height="60" rx="6" fill="rgba(30, 41, 59, 0.5)" stroke="#94a3b8" stroke-width="1.5"/><text x="835" y="534" fill="white" font-size="12" font-weight="600" text-anchor="middle">GitHub Actions</text><text x="835" y="554" fill="#94a3b8" font-size="9" text-anchor="middle">Types · lint · tests · build</text></g><text x="220" y="280" fill="#94a3b8" font-size="9" text-anchor="middle">UI</text>
+<text x="475" y="280" fill="#94a3b8" font-size="9" text-anchor="middle">JSON</text>
+<text x="715" y="280" fill="#94a3b8" font-size="9" text-anchor="middle">SQL</text>
+<text x="610" y="231" fill="#94a3b8" font-size="8">validate</text>
+<text x="848" y="231" fill="#a78bfa" font-size="8">migrate</text>
+<text x="260" y="372" fill="#94a3b8" font-size="9">Browser → API → database. Database credentials remain server-side.</text>
+<text x="260" y="390" fill="#64748b" font-size="8">Development: Vite /api proxy. Build: Express serves the web application.</text>
+<!-- Legend starts 30px below the lowest boundary (ends at y=605). -->
+<text x="40" y="639" fill="white" font-size="10" font-weight="600">LEGEND</text>
+<rect x="125" y="630" width="16" height="11" rx="2" fill="rgba(8, 51, 68, 0.4)" stroke="#22d3ee"/>
+<text x="150" y="639" fill="#94a3b8" font-size="9">Frontend</text>
+<rect x="245" y="630" width="16" height="11" rx="2" fill="rgba(6, 78, 59, 0.4)" stroke="#34d399"/>
+<text x="270" y="639" fill="#94a3b8" font-size="9">Backend</text>
+<rect x="365" y="630" width="16" height="11" rx="2" fill="rgba(76, 29, 149, 0.4)" stroke="#a78bfa"/>
+<text x="390" y="639" fill="#94a3b8" font-size="9">Database</text>
+<line x1="505" y1="635" x2="529" y2="635" stroke="#94a3b8" stroke-dasharray="4,4"/>
+<text x="540" y="639" fill="#94a3b8" font-size="9">Build / development dependency</text>
+<text x="40" y="680" fill="#64748b" font-size="8">Design review · 2026-10-02 · Synthetic portfolio scenario</text>
+</svg>

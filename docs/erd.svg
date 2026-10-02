@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 545" role="img" aria-labelledby="erd-title erd-description" style="font-family:'JetBrains Mono',monospace">
+<title id="erd-title">Fleet Test Operations business entity relationship diagram</title>
+<desc id="erd-description">One vehicle can have zero or more test runs. Each run belongs to one vehicle. One run can have zero or more issues, each belonging to one run. Issues derive their vehicle through their test run.</desc>
+<defs><pattern id="erd-grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1e293b" stroke-width="0.5"/></pattern></defs>
+<rect width="1120" height="545" rx="12" fill="#020617"/><rect width="1120" height="545" fill="url(#erd-grid)"/>
+<text x="35" y="42" fill="white" font-size="17" font-weight="700">Fleet Test Operations · SQL model</text>
+<text x="35" y="65" fill="#94a3b8" font-size="10">Three business entities · PostgreSQL · planned schema</text>
+<!-- Connectors are drawn before the table backgrounds. -->
+<line x1="325" y1="180" x2="415" y2="180" stroke="#a78bfa" stroke-width="1.5"/>
+<line x1="330" y1="174" x2="330" y2="186" stroke="#a78bfa"/>
+<circle cx="395" cy="180" r="4" fill="#020617" stroke="#a78bfa"/>
+<path d="M 401 180 L 415 173 M 401 180 L 415 180 M 401 180 L 415 187" fill="none" stroke="#a78bfa"/>
+<line x1="705" y1="180" x2="795" y2="180" stroke="#a78bfa" stroke-width="1.5"/>
+<line x1="710" y1="174" x2="710" y2="186" stroke="#a78bfa"/>
+<circle cx="775" cy="180" r="4" fill="#020617" stroke="#a78bfa"/>
+<path d="M 781 180 L 795 173 M 781 180 L 795 180 M 781 180 L 795 187" fill="none" stroke="#a78bfa"/>
+<text x="370" y="152" fill="#c4b5fd" font-size="10" text-anchor="middle">1 : 0..*</text>
+<text x="750" y="152" fill="#c4b5fd" font-size="10" text-anchor="middle">1 : 0..*</text>
+
+<rect x="35" y="105" width="290" height="295" rx="6" fill="#0f172a"/>
+<rect x="35" y="105" width="290" height="295" rx="6" fill="rgba(76, 29, 149, 0.4)" stroke="#a78bfa" stroke-width="1.5"/>
+<text x="55" y="135" fill="white" font-size="14" font-weight="600">vehicles</text>
+<line x1="35" y1="149" x2="325" y2="149" stroke="#6d28d9"/>
+<text x="53" y="178" fill="#c4b5fd" font-size="11" xml:space="preserve">PK  id                 uuid</text>
+<text x="53" y="201" fill="#c4b5fd" font-size="11" xml:space="preserve">UQ  license_plate      text</text>
+<text x="53" y="224" fill="#cbd5e1" font-size="11" xml:space="preserve">    model              text</text>
+<text x="53" y="247" fill="#cbd5e1" font-size="11" xml:space="preserve">    status             text</text>
+<text x="53" y="270" fill="#cbd5e1" font-size="11" xml:space="preserve">    created_at   timestamptz</text>
+<text x="53" y="293" fill="#cbd5e1" font-size="11" xml:space="preserve">    updated_at   timestamptz</text>
+<rect x="415" y="105" width="290" height="295" rx="6" fill="#0f172a"/>
+<rect x="415" y="105" width="290" height="295" rx="6" fill="rgba(76, 29, 149, 0.4)" stroke="#a78bfa" stroke-width="1.5"/>
+<text x="435" y="135" fill="white" font-size="14" font-weight="600">test_runs</text>
+<line x1="415" y1="149" x2="705" y2="149" stroke="#6d28d9"/>
+<text x="433" y="178" fill="#c4b5fd" font-size="11" xml:space="preserve">PK  id                 uuid</text>
+<text x="433" y="201" fill="#c4b5fd" font-size="11" xml:space="preserve">FK  vehicle_id         uuid</text>
+<text x="433" y="224" fill="#cbd5e1" font-size="11" xml:space="preserve">    driver_name        text</text>
+<text x="433" y="247" fill="#cbd5e1" font-size="11" xml:space="preserve">    started_at   timestamptz</text>
+<text x="433" y="270" fill="#cbd5e1" font-size="11" xml:space="preserve">    ended_at     timestamptz?</text>
+<text x="433" y="293" fill="#cbd5e1" font-size="11" xml:space="preserve">    distance_km numeric(10,2)?</text>
+<text x="433" y="316" fill="#cbd5e1" font-size="11" xml:space="preserve">    status             text</text>
+<rect x="795" y="105" width="290" height="295" rx="6" fill="#0f172a"/>
+<rect x="795" y="105" width="290" height="295" rx="6" fill="rgba(76, 29, 149, 0.4)" stroke="#a78bfa" stroke-width="1.5"/>
+<text x="815" y="135" fill="white" font-size="14" font-weight="600">issues</text>
+<line x1="795" y1="149" x2="1085" y2="149" stroke="#6d28d9"/>
+<text x="813" y="178" fill="#c4b5fd" font-size="11" xml:space="preserve">PK  id                 uuid</text>
+<text x="813" y="201" fill="#c4b5fd" font-size="11" xml:space="preserve">FK  test_run_id        uuid</text>
+<text x="813" y="224" fill="#cbd5e1" font-size="11" xml:space="preserve">    issue_type         text</text>
+<text x="813" y="247" fill="#cbd5e1" font-size="11" xml:space="preserve">    description        text</text>
+<text x="813" y="270" fill="#cbd5e1" font-size="11" xml:space="preserve">    severity           text</text>
+<text x="813" y="293" fill="#cbd5e1" font-size="11" xml:space="preserve">    status             text</text>
+<text x="813" y="316" fill="#cbd5e1" font-size="11" xml:space="preserve">    created_at   timestamptz</text>
+<text x="813" y="339" fill="#cbd5e1" font-size="11" xml:space="preserve">    updated_at   timestamptz</text>
+<text x="813" y="362" fill="#cbd5e1" font-size="11" xml:space="preserve">    resolved_at  timestamptz?</text>
+<text x="35" y="440" fill="#cbd5e1" font-size="11">PK primary key · FK foreign key · UQ unique · ? nullable</text>
+<text x="35" y="467" fill="#94a3b8" font-size="10">CHECK: nonnegative distance; valid time ordering; complete completed runs; consistent resolution timestamp.</text>
+<text x="35" y="493" fill="#94a3b8" font-size="10">The vehicle for an issue is derived via test_runs. Historical records are retained.</text>
+<text x="35" y="521" fill="#64748b" font-size="9">A parent may have zero children. Every child has exactly one parent. Times are stored with time zones.</text>
+</svg>
