@@ -2,12 +2,21 @@ import { useRef, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { jstToday, type Issue, type Vehicle, type Page } from '@fleet/contracts';
 import { useApi } from '../../lib/use-api';
+import { apiRequest } from '../../lib/api';
 import { queryString, formatJst, titleCase } from '../../lib/format';
 import { IssueForm } from './IssueForm';
 import { IssueFilters } from './IssueFilters';
 import { StatusBadge } from '../../components/StatusBadge';
 import { StatePanel } from '../../components/StatePanel';
 import { Pagination } from '../../components/Pagination';
+async function loadVehicleOptions(path: string, options?: RequestInit): Promise<Vehicle[]> {
+  const vehicles: Vehicle[] = [];
+  for (let page = 1; ; page++) {
+    const result = await apiRequest<Page<Vehicle>>(path + '&page=' + page, options);
+    vehicles.push(...result.items);
+    if (page * result.pageSize >= result.total) return vehicles;
+  }
+}
 export function IssuesPage() {
   const [params, setParams] = useSearchParams();
   const [editing, setEditing] = useState<Issue | 'create' | null>(null);
@@ -23,7 +32,10 @@ export function IssuesPage() {
   const issues = useApi<Page<Issue>>(
     '/api/issues?' + queryString({ ...values, testRunId: runId, page, pageSize: 10 }),
   );
-  const vehicles = useApi<Page<Vehicle>>('/api/vehicles?pageSize=100');
+  const vehicles = useApi<Vehicle[]>(
+    '/api/vehicles?pageSize=100&sort=licensePlate',
+    loadVehicleOptions,
+  );
   function filter(key: string, value: string) {
     setParams((previous) => {
       const next = key === 'clear' ? new URLSearchParams() : new URLSearchParams(previous);
@@ -92,7 +104,12 @@ export function IssuesPage() {
             <StatePanel error={vehicles.error} retry={vehicles.reload} />
           </div>
         )}
-        <IssueFilters values={values} vehicles={vehicles.data?.items ?? []} onChange={filter} />
+        <IssueFilters
+          values={values}
+          vehicles={vehicles.data ?? []}
+          vehicleOptionsUnavailable={vehicles.loading || Boolean(vehicles.error)}
+          onChange={filter}
+        />
         {runId && (
           <div className="run-filter">
             <span>Filtered to one test run</span>
@@ -113,6 +130,7 @@ export function IssuesPage() {
                 <tr>
                   <th scope="col">Issue</th>
                   <th scope="col">Vehicle</th>
+                  <th scope="col">Test run</th>
                   <th scope="col">Severity</th>
                   <th scope="col">Status</th>
                   <th scope="col">Resolution</th>
@@ -125,6 +143,7 @@ export function IssuesPage() {
                     <th scope="row" className="issue-description">
                       <p>{issue.description}</p>
                       <small>{titleCase(issue.issueType)}</small>
+                      <small>Created {formatJst(issue.createdAt)}</small>
                     </th>
                     <td>
                       <Link
@@ -142,6 +161,10 @@ export function IssuesPage() {
                       >
                         {issue.licensePlate}
                       </Link>
+                    </td>
+                    <td className="run-context">
+                      <span className="equipment-id">Run {issue.testRunId.slice(-12)}</span>
+                      <time dateTime={issue.runStartedAt}>{formatJst(issue.runStartedAt)}</time>
                     </td>
                     <td>
                       <StatusBadge value={issue.severity} />

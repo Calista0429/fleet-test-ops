@@ -12,6 +12,9 @@ const pool = new pg.Pool({
   statement_timeout: 10000,
   max: 10,
 });
+pool.on('error', (error) => {
+  console.error('An idle database connection failed; later requests will reconnect.', error);
+});
 const port = Number(process.env.PORT ?? 3001);
 const host = process.env.HOST ?? '127.0.0.1';
 const server = createApp(pool).listen(port, host, () =>

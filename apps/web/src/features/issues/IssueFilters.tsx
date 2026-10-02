@@ -3,10 +3,12 @@ import { titleCase } from '../../lib/format';
 export function IssueFilters({
   values,
   vehicles,
+  vehicleOptionsUnavailable,
   onChange,
 }: {
   values: { vehicleId: string; severity: string; status: string };
   vehicles: Vehicle[];
+  vehicleOptionsUnavailable: boolean;
   onChange: (key: string, value: string) => void;
 }) {
   return (
@@ -15,6 +17,7 @@ export function IssueFilters({
         Filter vehicle
         <select
           value={values.vehicleId}
+          disabled={vehicleOptionsUnavailable}
           onChange={(event) => onChange('vehicleId', event.target.value)}
         >
           <option value="">All vehicles</option>

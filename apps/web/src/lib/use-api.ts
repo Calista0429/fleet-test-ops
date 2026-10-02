@@ -1,6 +1,9 @@
 import { useEffect, useState, useCallback } from 'react';
 import { apiRequest, ApiClientError } from './api';
-export function useApi<T>(path: string): {
+export function useApi<T>(
+  path: string,
+  load: (path: string, options?: RequestInit) => Promise<T> = apiRequest,
+): {
   data: T | null;
   loading: boolean;
   error: ApiClientError | null;
@@ -16,7 +19,7 @@ export function useApi<T>(path: string): {
     setLoading(true);
     setData(null);
     setError(null);
-    apiRequest<T>(path, { signal: controller.signal })
+    load(path, { signal: controller.signal })
       .then((value) => {
         if (active) setData(value);
       })
@@ -39,6 +42,6 @@ export function useApi<T>(path: string): {
       active = false;
       controller.abort();
     };
-  }, [path, reloadKey]);
+  }, [path, reloadKey, load]);
   return { data, loading, error, reload: useCallback(() => setReloadKey((key) => key + 1), []) };
 }

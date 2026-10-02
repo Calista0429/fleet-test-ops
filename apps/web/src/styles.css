@@ -916,6 +916,7 @@ tbody tr:hover {
   line-height: 1.5;
 }
 .issue-description small {
+  display: block;
   font-size: 11px;
   color: var(--muted);
   font-weight: 400;
@@ -928,6 +929,14 @@ tbody tr:hover {
   font-size: 11px;
   max-width: 155px;
   white-space: normal;
+}
+.run-context {
+  font-size: 11px;
+}
+.run-context time {
+  display: block;
+  margin-top: 5px;
+  color: var(--muted);
 }
 .table-action {
   min-height: 31px;
