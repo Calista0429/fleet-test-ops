@@ -15,7 +15,7 @@ Verified locally on 2026-10-02 with Node 24.21.0 and PostgreSQL 17.5. This recor
 | `npm run test:e2e`        | 3 Chromium workflows passed using a generated database schema                                                           |
 | `npm run test:smoke`      | Compiled index, direct vehicle navigation, readiness, API 404, built asset, missing asset, non-navigation checks passed |
 | Dependency audit          | No reported vulnerabilities after the targeted esbuild 0.28.2 resolution                                                |
-| Documentation             | Japanese disclosure expanded, images loaded, architecture HTML rendered; static SVG/ER targets included                 |
+| Documentation             | English/Japanese switch works in both directions, images loaded, architecture HTML rendered; SVG/ER targets included    |
 
 ## Behavior evidence
 
@@ -56,6 +56,12 @@ These are the complete recorded rulings, in decision order, with the cost if a d
 5. Leave actual Docker startup unverified because the daemon is stopped. Native PostgreSQL provides the verified local demo and the README identifies the alternative accurately. Cost: Docker-specific startup problems may remain.
 6. Leave hosted Actions, remote Issues/PRs, and public deployment unexecuted because no remote destination was supplied. Committed configuration, templates, branch history, and local evidence describe the workflow honestly. Cost: hosted environment or repository configuration may need changes.
 7. Leave architecture PNG/PDF downloads unverified because download capture was unavailable. HTML and static SVG render and the README discloses the limitation. Cost: export controls may need repair; static diagrams remain usable.
+
+## Presentation refinement
+
+On 2026-10-02, the user requested removal of the lower-left portfolio label and a single English/Japanese README switch. The sidebar's portfolio footer and its unused styles were removed. The complete Japanese content moved to `README.ja.md`; both documents use one linked SVG control that highlights the selected language and opens the other version. This follows GitHub's support for [repository-relative Markdown links](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax#relative-links).
+
+The production build, lint, and formatting checks passed. Both README switch directions were exercised in a local Markdown preview; images loaded, local link targets exist, and both SVG controls parse as valid XML. The running production UI no longer displays the sidebar label, and the desktop documentation screenshots were refreshed. This follow-up changes presentation and documentation; the earlier 94-test and three-workflow record above describes the verified application behavior before this refinement.
 
 ## Limits of this evidence
 

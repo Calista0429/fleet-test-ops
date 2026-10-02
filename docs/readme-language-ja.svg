@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="228" height="40" viewBox="0 0 228 40" role="img" aria-labelledby="title">
+  <title id="title">Japanese selected. Switch to English.</title>
+  <rect x="0.5" y="0.5" width="227" height="39" rx="20" fill="#eff3f7" stroke="#ced8e2" />
+  <rect x="114" y="4" width="110" height="32" rx="16" fill="#183e68" />
+  <g font-family="Arial, Helvetica, sans-serif" font-size="14" text-anchor="middle">
+    <text x="59" y="25" fill="#273547">English</text>
+    <text x="169" y="25" fill="#ffffff" font-weight="700">日本語</text>
+  </g>
+</svg>

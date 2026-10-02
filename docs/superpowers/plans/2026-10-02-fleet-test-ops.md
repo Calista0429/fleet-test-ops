@@ -2,7 +2,7 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Build a reviewable English-language fleet operations application with real PostgreSQL persistence, a complete incident workflow, and an English README with an expandable Japanese version.
+**Goal:** Build a reviewable English-language fleet operations application with real PostgreSQL persistence, a complete incident workflow, and an English README with a switchable Japanese version.
 
 **Architecture:** A React/Vite web application calls a TypeScript/Express API. The API uses shared Zod contracts and parameterized PostgreSQL queries. Versioned SQL migrations, deterministic sample data, and focused database/browser tests make the business behavior inspectable.
 
@@ -15,7 +15,7 @@
 ## Global Constraints
 
 - Use English for identifiers, comments, interface copy, API errors, commit messages, Issues, PR descriptions, tests, and primary documentation.
-- Include a complete Japanese README version inside a native `<details>` block with `<summary>日本語版を表示 / Japanese version</summary>`.
+- Provide one English/Japanese language switch at the top of the README, linking `README.md` and `README.ja.md` so only the selected language is displayed.
 - Keep English and Japanese sections aligned as documentation evolves. Translate meaning and metric definitions, not code identifiers or commands.
 - Use the architecture-diagram skill to produce an English HTML diagram and a matching static SVG embedded in the README. Include a separate ER diagram.
 - All sample vehicles, people, and incidents are fictional.
@@ -496,7 +496,7 @@ npm run test:e2e
 
 Set DATABASE_URL to the CI PostgreSQL service. Database fixtures isolate schemas for the test process. Browser orchestration uses its own schema and explicit application ports; wait for health readiness rather than fixed sleeps. Preserve failure reports/screenshots as workflow artifacts. Pin Actions versions to verified release SHAs when authoring the workflow.
 
-- [x] **Step 4: Finish and verify both README languages.** Replace design-phase labels with actual implementation status only after verification. Add application screenshots, exact prerequisites, the central demo flow, metric semantics, working setup/test commands, ER rationale, and limitations in both English and Japanese. Keep the existing native Japanese toggle and static architecture/ER images.
+- [x] **Step 4: Finish and verify both README languages.** Replace design-phase labels with actual implementation status only after verification. Add application screenshots, exact prerequisites, the central demo flow, metric semantics, working setup/test commands, ER rationale, and limitations in both English and Japanese. Keep the English/Japanese language switch and static architecture/ER images.
 
 Verify the setup sequence against a fresh local database, preserving the developer's existing database:
 

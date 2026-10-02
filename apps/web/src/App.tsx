@@ -26,10 +26,6 @@ export function App() {
           </NavLink>
           <NavLink to="/issues">Issue management</NavLink>
         </nav>
-        <div className="rail-footer">
-          <span className="demo-indicator" />
-          Portfolio demo<p>Fictional vehicles and test data</p>
-        </div>
       </aside>
       <div className="workspace">
         <div className="workspace-bar">

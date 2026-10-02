@@ -15,7 +15,7 @@ Success means a reviewer can follow a three-minute workflow: discover a severe u
 ## Language requirements
 
 - Use English for identifiers, comments, interface copy, API errors, commit messages, Issues, PR descriptions, tests, and primary documentation.
-- Include a complete Japanese README version inside a native `<details>` block with `<summary>日本語版を表示 / Japanese version</summary>`.
+- Provide one English/Japanese language switch at the top of the README, linking `README.md` and `README.ja.md` so only the selected language is displayed.
 - Keep English and Japanese sections aligned as documentation evolves. Translate meaning and metric definitions, not code identifiers or commands.
 - Use the architecture-diagram skill to produce an English HTML diagram and a matching static SVG embedded in the README. Include a separate ER diagram.
 

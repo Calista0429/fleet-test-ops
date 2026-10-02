@@ -175,25 +175,6 @@ summary:focus-visible {
   border-left: 3px solid #76d2ca;
   padding-left: 10px;
 }
-.rail-footer {
-  margin-top: auto;
-  padding: 0 10px;
-  color: #e0eaf1;
-  font-size: 12px;
-}
-.rail-footer p {
-  color: #b9ccdf;
-  font-size: 11px;
-  margin: 9px 0 0;
-}
-.demo-indicator {
-  display: inline-block;
-  width: 7px;
-  height: 7px;
-  background: #76d2ca;
-  border-radius: 50%;
-  margin-right: 7px;
-}
 .workspace {
   min-width: 0;
 }
@@ -697,9 +678,6 @@ tbody tr:hover {
     border-left: 0;
     border-bottom: 2px solid #76d2ca;
     padding-left: 9px;
-  }
-  .rail-footer {
-    display: none;
   }
   .workspace-bar {
     padding: 11px 20px;
