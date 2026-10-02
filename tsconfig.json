@@ -3,11 +3,16 @@
   "compilerOptions": {
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
-    "noEmit": true
+    "noEmit": true,
+    "lib": [
+      "ES2022",
+      "DOM"
+    ]
   },
   "include": [
     "database/**/*.ts",
-    "tests/support/**/*.ts",
-    "vitest.config.ts"
+    "tests/**/*.ts",
+    "vitest.config.ts",
+    "playwright.config.ts"
   ]
 }
