@@ -1,0 +1,16 @@
+{
+  "name": "@fleet/api",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "build": "tsup src/server.ts --format esm --platform node --target node24 --out-dir dist --clean",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "@fleet/contracts": "*",
+    "express": "5.2.1",
+    "pg": "8.23.1"
+  }
+}
