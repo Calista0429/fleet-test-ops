@@ -2,7 +2,7 @@
 
 An automotive test-fleet portfolio project designed to demonstrate TypeScript, React, SQL data modeling, and a traceable GitHub development workflow.
 
-**Project status:** Design prepared for review. Application implementation has not started; the architecture below describes the planned MVP.
+**Project status:** Design approved; implementation plan prepared for review. Application implementation has not started; the architecture below describes the planned MVP.
 
 This is an independent project with fictional sample data. The test-fleet scenario is a proposed business use case, not a description of Bosch's internal systems.
 
@@ -13,7 +13,7 @@ This is an independent project with fictional sample data. The test-fleet scenar
 
 車両テストの担当者が、車両の稼働状況、テスト履歴、不具合の対応状況を確認・更新できるWebアプリケーションを想定したポートフォリオです。TypeScript、React、SQLによるデータモデリング、GitHubを活用した開発プロセスを示すことを目的としています。
 
-**現在の進捗：** 設計案を作成し、レビューを待っている段階です。アプリケーションの実装はまだ開始していません。以下の構成図は、初期バージョンの設計を示しています。
+**現在の進捗：** 設計案は承認済みで、実装計画のレビューを待っている段階です。アプリケーションの実装はまだ開始していません。以下の構成図は、初期バージョンの設計を示しています。
 
 本プロジェクトは独自に企画したもので、サンプルデータは架空のものです。Bosch社内の実際のシステムや業務を再現したものではありません。
 
@@ -68,7 +68,7 @@ This is an independent project with fictional sample data. The test-fleet scenar
 
 PostgreSQLを使用した結合テスト、型チェック、Lint、ビルド、主要な操作フローのブラウザーテストを計画しています。ローカル環境の起動手順は、実装後に実際に確認したコマンドを追加します。
 
-詳細は[設計書](docs/superpowers/specs/2026-10-02-fleet-test-ops-design.md)を参照してください。
+詳細は[設計書](docs/superpowers/specs/2026-10-02-fleet-test-ops-design.md)と[実装計画](docs/superpowers/plans/2026-10-02-fleet-test-ops.md)を参照してください。
 
 ## 初期バージョンの対象外
 
@@ -127,7 +127,7 @@ Code, comments, interface copy, commits, Issues, PRs, and primary documentation 
 
 Development records will describe real requirements, changes, and verification. Planned checks include PostgreSQL integration tests, type checks, lint, a production build, and a browser test of the central workflow. Local setup instructions will be added after the implemented commands have been verified.
 
-See the [written design](docs/superpowers/specs/2026-10-02-fleet-test-ops-design.md) for exact scope, metric definitions, API responsibilities, and acceptance criteria.
+See the [written design](docs/superpowers/specs/2026-10-02-fleet-test-ops-design.md) for exact scope, metric definitions, API responsibilities, and acceptance criteria, and the [implementation plan](docs/superpowers/plans/2026-10-02-fleet-test-ops.md) for the five development tasks.
 
 ## Initial limitations
 
