@@ -1,2 +1,9 @@
-import {titleCase} from '../lib/format';
-export function StatusBadge({value}:{value:string}) {return <span className={'badge badge-'+value}><span aria-hidden='true' className='badge-dot'/>{titleCase(value)}</span>;}
+import { titleCase } from '../lib/format';
+export function StatusBadge({ value }: { value: string }) {
+  return (
+    <span className={'badge badge-' + value}>
+      <span aria-hidden="true" className="badge-dot" />
+      {titleCase(value)}
+    </span>
+  );
+}

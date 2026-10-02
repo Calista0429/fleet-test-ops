@@ -2,7 +2,7 @@
 
 Date: 2026-10-02 (Asia/Tokyo)
 
-Status: Approved by the user on 2026-10-02. Implementation-plan review is pending; application implementation has not started.
+Status: Approved by the user on 2026-10-02. Application implemented; final verification/review evidence is recorded in docs/verification.md.
 
 ## Purpose and audience
 

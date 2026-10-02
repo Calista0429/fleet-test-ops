@@ -1,0 +1,10 @@
+node_modules/
+**/dist/
+.superpowers/
+.local/
+test-results/
+playwright-report/
+package-lock.json
+docs/superpowers/
+docs/architecture.html
+docs/*.svg

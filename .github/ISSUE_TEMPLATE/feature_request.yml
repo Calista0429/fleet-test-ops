@@ -1,0 +1,27 @@
+name: Business requirement
+description: Propose a focused improvement with observable acceptance criteria.
+title: 'Feature: '
+labels: [enhancement]
+body:
+  - type: textarea
+    id: purpose
+    attributes:
+      label: Business purpose
+      description: Who needs this change, and which operational decision will it support?
+    validations:
+      required: true
+  - type: textarea
+    id: behavior
+    attributes:
+      label: Expected behavior
+      description: Describe the trigger, resulting behavior, and any relevant empty or error states.
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      description: List outcomes a reviewer can verify.
+      placeholder: '- [ ] A coordinator can ...'
+    validations:
+      required: true

@@ -4,15 +4,7 @@
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
     "noEmit": true,
-    "lib": [
-      "ES2022",
-      "DOM"
-    ]
+    "lib": ["ES2022", "DOM"]
   },
-  "include": [
-    "database/**/*.ts",
-    "tests/**/*.ts",
-    "vitest.config.ts",
-    "playwright.config.ts"
-  ]
+  "include": ["database/**/*.ts", "tests/**/*.ts", "vitest.config.ts", "playwright.config.ts"]
 }

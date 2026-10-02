@@ -1,4 +1,25 @@
 import type { DashboardResponse, Vehicle } from '@fleet/contracts';
-export const vehicle:Vehicle={id:'10000000-0000-4000-8000-000000000001',licensePlate:'TEST-001',model:'Prototype sedan',status:'available',createdAt:'2026-10-01T00:00:00.000Z',updatedAt:'2026-10-01T00:00:00.000Z'};
-export function makeDashboard(distanceKm=20):DashboardResponse {return {range:{from:'2026-10-01',to:'2026-10-01'},current:{vehicleCount:1,availableVehicleCount:1,unresolvedIssueCount:0},period:{completedRunCount:1,completedDistanceKm:distanceKm},distanceByDay:[{date:'2026-10-01',distanceKm}],distanceByVehicle:[{vehicleId:vehicle.id,licensePlate:vehicle.licensePlate,distanceKm}]};}
-export function deferred<T>() {let resolve!:(value:T)=>void;const promise=new Promise<T>(done=>{resolve=done;});return {promise,resolve};}
+export const vehicle: Vehicle = {
+  id: '10000000-0000-4000-8000-000000000001',
+  licensePlate: 'TEST-001',
+  model: 'Prototype sedan',
+  status: 'available',
+  createdAt: '2026-10-01T00:00:00.000Z',
+  updatedAt: '2026-10-01T00:00:00.000Z',
+};
+export function makeDashboard(distanceKm = 20): DashboardResponse {
+  return {
+    range: { from: '2026-10-01', to: '2026-10-01' },
+    current: { vehicleCount: 1, availableVehicleCount: 1, unresolvedIssueCount: 0 },
+    period: { completedRunCount: 1, completedDistanceKm: distanceKm },
+    distanceByDay: [{ date: '2026-10-01', distanceKm }],
+    distanceByVehicle: [{ vehicleId: vehicle.id, licensePlate: vehicle.licensePlate, distanceKm }],
+  };
+}
+export function deferred<T>() {
+  let resolve!: (value: T) => void;
+  const promise = new Promise<T>((done) => {
+    resolve = done;
+  });
+  return { promise, resolve };
+}

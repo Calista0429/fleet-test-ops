@@ -1,0 +1,23 @@
+name: Bug report
+description: Report an operational workflow that does not behave as expected.
+title: 'Bug: '
+labels: [bug]
+body:
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to reproduce
+      description: Include the page, filters, and relevant sample record.
+    validations:
+      required: true
+  - type: textarea
+    id: result
+    attributes:
+      label: Expected and observed behavior
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment and evidence
+      description: Node/PostgreSQL/browser versions, screenshots, and relevant logs. Remove credentials.

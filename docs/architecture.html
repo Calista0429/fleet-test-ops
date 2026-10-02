@@ -196,13 +196,13 @@
           <button class="toolbar-toggle" onclick="this.parentElement.classList.toggle('expanded')" title="Export options" aria-label="Export options">⋯</button>
         </div>
       </div>
-      <p class="subtitle">Planned MVP · explicit SQL model · three-screen coordinator workflow</p>
+      <p class="subtitle">Implemented MVP · explicit SQL model · three-screen coordinator workflow</p>
     </div>
 
     <!-- Main Diagram -->
     <div class="diagram-container">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 700" role="img" aria-labelledby="architecture-title architecture-description" style="font-family:'JetBrains Mono',monospace">
-<title id="architecture-title">Fleet Test Operations planned architecture</title>
+<title id="architecture-title">Fleet Test Operations application architecture</title>
 <desc id="architecture-description">A test coordinator uses a React and TypeScript web app. The web app calls an Express API, which queries PostgreSQL. Shared validation contracts and migrations support these components. A separate development workflow uses GitHub Issues, pull requests, and automated checks.</desc>
 <defs>
   <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#64748b"/></marker>
@@ -211,7 +211,7 @@
 <rect width="1000" height="700" rx="12" fill="#020617"/>
 <rect width="1000" height="700" fill="url(#grid)"/>
 <text x="40" y="40" fill="white" font-size="16" font-weight="700">Fleet Test Operations</text>
-<text x="40" y="61" fill="#94a3b8" font-size="9">Planned MVP · React + TypeScript · Express · PostgreSQL</text>
+<text x="40" y="61" fill="#94a3b8" font-size="9">Implemented MVP · React + TypeScript · Express · PostgreSQL</text>
 <!-- Connections precede all opaque component backgrounds. -->
 <path d="M 180 295 H 258" fill="none" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrowhead)"/>
 <path d="M 440 295 H 508" fill="none" stroke="#22d3ee" stroke-width="1.5" marker-end="url(#arrowhead)"/>
@@ -225,7 +225,7 @@
 <rect x="230" y="100" width="720" height="310" rx="12" fill="none" stroke="#94a3b8" stroke-width="1" stroke-dasharray="8,4"/>
 <text x="248" y="122" fill="#cbd5e1" font-size="10" font-weight="600">APPLICATION · LOCAL DEVELOPMENT / SAME-ORIGIN BUILD</text>
 <rect x="230" y="455" width="720" height="150" rx="12" fill="none" stroke="#94a3b8" stroke-width="1" stroke-dasharray="8,4"/>
-<text x="248" y="480" fill="#cbd5e1" font-size="10" font-weight="600">GITHUB DEVELOPMENT WORKFLOW · SEPARATE FROM RUNTIME</text>
+<text x="248" y="480" fill="#cbd5e1" font-size="10" font-weight="600">GITHUB WORKFLOW CONFIGURATION · SEPARATE FROM RUNTIME</text>
 <g><rect x="40" y="250" width="140" height="90" rx="6" fill="#0f172a"/><rect x="40" y="250" width="140" height="90" rx="6" fill="rgba(30, 41, 59, 0.5)" stroke="#94a3b8" stroke-width="1.5"/><text x="110" y="274" fill="white" font-size="12" font-weight="600" text-anchor="middle">Test coordinator</text><text x="110" y="294" fill="#94a3b8" font-size="9" text-anchor="middle">Fleet availability</text><text x="110" y="309" fill="#94a3b8" font-size="9" text-anchor="middle">Incident follow-up</text></g><g><rect x="260" y="250" width="180" height="90" rx="6" fill="#0f172a"/><rect x="260" y="250" width="180" height="90" rx="6" fill="rgba(8, 51, 68, 0.4)" stroke="#22d3ee" stroke-width="1.5"/><text x="350" y="274" fill="white" font-size="12" font-weight="600" text-anchor="middle">Web application</text><text x="350" y="294" fill="#94a3b8" font-size="9" text-anchor="middle">React · TypeScript · Vite</text><text x="350" y="309" fill="#94a3b8" font-size="9" text-anchor="middle">Overview / Vehicles / Issues</text><text x="350" y="324" fill="#94a3b8" font-size="9" text-anchor="middle">Charts · tables · forms</text></g><g><rect x="510" y="250" width="170" height="90" rx="6" fill="#0f172a"/><rect x="510" y="250" width="170" height="90" rx="6" fill="rgba(6, 78, 59, 0.4)" stroke="#34d399" stroke-width="1.5"/><text x="595" y="274" fill="white" font-size="12" font-weight="600" text-anchor="middle">REST API</text><text x="595" y="294" fill="#94a3b8" font-size="9" text-anchor="middle">Express · TypeScript</text><text x="595" y="309" fill="#94a3b8" font-size="9" text-anchor="middle">Validated requests</text><text x="595" y="324" fill="#94a3b8" font-size="9" text-anchor="middle">Parameterized SQL</text></g><g><rect x="750" y="250" width="170" height="90" rx="6" fill="#0f172a"/><rect x="750" y="250" width="170" height="90" rx="6" fill="rgba(76, 29, 149, 0.4)" stroke="#a78bfa" stroke-width="1.5"/><text x="835" y="274" fill="white" font-size="12" font-weight="600" text-anchor="middle">PostgreSQL</text><text x="835" y="294" fill="#94a3b8" font-size="9" text-anchor="middle">vehicles · test_runs · issues</text><text x="835" y="309" fill="#94a3b8" font-size="9" text-anchor="middle">Constraints · indexes</text><text x="835" y="324" fill="#94a3b8" font-size="9" text-anchor="middle">Persistent records</text></g><g><rect x="440" y="140" width="240" height="60" rx="6" fill="#0f172a"/><rect x="440" y="140" width="240" height="60" rx="6" fill="rgba(30, 41, 59, 0.5)" stroke="#94a3b8" stroke-width="1.5"/><text x="560" y="164" fill="white" font-size="12" font-weight="600" text-anchor="middle">Shared contracts</text><text x="560" y="184" fill="#94a3b8" font-size="9" text-anchor="middle">TypeScript types + Zod validation</text></g><g><rect x="740" y="140" width="190" height="60" rx="6" fill="#0f172a"/><rect x="740" y="140" width="190" height="60" rx="6" fill="rgba(76, 29, 149, 0.4)" stroke="#a78bfa" stroke-width="1.5"/><text x="835" y="164" fill="white" font-size="12" font-weight="600" text-anchor="middle">Database lifecycle</text><text x="835" y="184" fill="#94a3b8" font-size="9" text-anchor="middle">SQL migrations + sample seed</text></g><g><rect x="260" y="510" width="180" height="60" rx="6" fill="#0f172a"/><rect x="260" y="510" width="180" height="60" rx="6" fill="rgba(30, 41, 59, 0.5)" stroke="#94a3b8" stroke-width="1.5"/><text x="350" y="534" fill="white" font-size="12" font-weight="600" text-anchor="middle">Issues + branches</text><text x="350" y="554" fill="#94a3b8" font-size="9" text-anchor="middle">Business goals + acceptance</text></g><g><rect x="510" y="510" width="170" height="60" rx="6" fill="#0f172a"/><rect x="510" y="510" width="170" height="60" rx="6" fill="rgba(30, 41, 59, 0.5)" stroke="#94a3b8" stroke-width="1.5"/><text x="595" y="534" fill="white" font-size="12" font-weight="600" text-anchor="middle">Pull requests</text><text x="595" y="554" fill="#94a3b8" font-size="9" text-anchor="middle">Focused changes + evidence</text></g><g><rect x="750" y="510" width="170" height="60" rx="6" fill="#0f172a"/><rect x="750" y="510" width="170" height="60" rx="6" fill="rgba(30, 41, 59, 0.5)" stroke="#94a3b8" stroke-width="1.5"/><text x="835" y="534" fill="white" font-size="12" font-weight="600" text-anchor="middle">GitHub Actions</text><text x="835" y="554" fill="#94a3b8" font-size="9" text-anchor="middle">Types · lint · tests · build</text></g><text x="220" y="280" fill="#94a3b8" font-size="9" text-anchor="middle">UI</text>
 <text x="475" y="280" fill="#94a3b8" font-size="9" text-anchor="middle">JSON</text>
 <text x="715" y="280" fill="#94a3b8" font-size="9" text-anchor="middle">SQL</text>
@@ -243,19 +243,19 @@
 <text x="390" y="639" fill="#94a3b8" font-size="9">Database</text>
 <line x1="505" y1="635" x2="529" y2="635" stroke="#94a3b8" stroke-dasharray="4,4"/>
 <text x="540" y="639" fill="#94a3b8" font-size="9">Build / development dependency</text>
-<text x="40" y="680" fill="#64748b" font-size="8">Design review · 2026-10-02 · Synthetic portfolio scenario</text>
+<text x="40" y="680" fill="#64748b" font-size="8">Local build verified · 2026-10-02 · Synthetic portfolio scenario</text>
 </svg>
     </div>
 
     <div class="cards">
       <div class="card"><div class="card-header"><div class="card-dot cyan"></div><h3>Business workflow</h3></div><ul><li>• Find unresolved severe issues</li><li>• Inspect vehicle and test history</li><li>• Update issues and vehicle status</li><li>• Verify persisted results</li></ul></div>
       <div class="card"><div class="card-header"><div class="card-dot violet"></div><h3>SQL modeling evidence</h3></div><ul><li>• Three related business entities</li><li>• Foreign keys and CHECK constraints</li><li>• JST-aware historical aggregates</li><li>• Versioned migrations and seed data</li></ul></div>
-      <div class="card"><div class="card-header"><div class="card-dot emerald"></div><h3>Development evidence</h3></div><ul><li>• English code and development records</li><li>• Requirements linked to focused PRs</li><li>• Planned database-backed checks</li><li>• English README + Japanese toggle</li></ul></div>
+      <div class="card"><div class="card-header"><div class="card-dot emerald"></div><h3>Development evidence</h3></div><ul><li>• English code and development records</li><li>• Focused commits + PR template</li><li>• PostgreSQL + browser checks</li><li>• English README + Japanese toggle</li></ul></div>
     </div>
 
     <!-- Footer -->
     <p class="footer">
-      Fleet Test Operations · Planned architecture · 2026-10-02 · Diagram skill v1.1 by Cocoon AI
+      Fleet Test Operations · Application architecture · 2026-10-02 · Diagram skill v1.1 by Cocoon AI
     </p>
   </div>
 

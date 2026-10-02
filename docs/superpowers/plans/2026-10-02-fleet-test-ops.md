@@ -10,7 +10,7 @@
 
 **Spec:** [Approved design](../specs/2026-10-02-fleet-test-ops-design.md).
 
-**Status:** Prepared for implementation-plan review. None of the application tasks below has been executed.
+**Status:** Approved and executed using Native execution. Feature milestones are complete; final verification/review evidence is recorded in docs/verification.md.
 
 ## Global Constraints
 
@@ -108,7 +108,7 @@ docs/erd.svg                        Existing README ER diagram export
 - Produces: `migrate(pool: Pool): Promise<void>`, `seed(pool: Pool, anchorDate: string): Promise<void>`, `createTestDatabase(anchorDate?: string): Promise<{ pool: Pool; dispose(): Promise<void> }>`, and shared contracts from `@fleet/contracts`.
 - Produces: `jstRange(from: string, to: string): { start: string; endExclusive: string }`, `jstToday(now?: Date): string`, and `defaultDateRange(now?: Date): { from: string; to: string }`.
 
-- [ ] **Step 1: Establish the minimal testable workspace.** Set the private root package with `workspaces: ["apps/*", "packages/*"]`, `.nvmrc` containing `24`, strict TypeScript, and a lockfile. Use these package names: `@fleet/contracts`, `@fleet/api`, `@fleet/web`. Install test/database dependencies first; add the web scaffold in Task 3. Expose the following root commands:
+- [x] **Step 1: Establish the minimal testable workspace.** Set the private root package with `workspaces: ["apps/*", "packages/*"]`, `.nvmrc` containing `24`, strict TypeScript, and a lockfile. Use these package names: `@fleet/contracts`, `@fleet/api`, `@fleet/web`. Install test/database dependencies first; add the web scaffold in Task 3. Expose the following root commands:
 
 ```json
 {
@@ -135,7 +135,7 @@ Do not run commands for packages that do not exist yet. The first task's accepta
 
 Configure a `postgres:17` service with a named volume, port `5433:5432`, and `pg_isready` health check. The example local URL is `postgresql://fleet:local_fleet_password@localhost:5433/fleet_ops`; the password is a documented disposable local default. If Docker is unavailable, use a reachable PostgreSQL instance with `DATABASE_URL`. Tests create their own generated schema in that instance and never truncate public application tables.
 
-- [ ] **Step 2: Write failing contract and database tests.** Include the following date and constraint cases, using actual PostgreSQL in the model tests:
+- [x] **Step 2: Write failing contract and database tests.** Include the following date and constraint cases, using actual PostgreSQL in the model tests:
 
 ```ts
 it("converts inclusive JST calendar dates to an exclusive UTC interval", () => {
@@ -163,9 +163,9 @@ it("rejects negative distance at the database boundary", async () => {
 
 Also test reversed ranges, current JST date around UTC midnight, duplicate license plates, nonexistent vehicle/run foreign keys, end-before-start, completed runs without distance/end, accepted in-progress runs with null distance/end, and mismatched issue resolution state. Fixture helpers create a real parent vehicle/run first so each test isolates the intended constraint. Add reset-command tests that reject a missing confirmation flag and a non-demo database before executing any write.
 
-- [ ] **Step 3: Run the tests before implementation.** Run `npm run test:contracts` and `npm run test:db`. Confirm missing contracts/migration behavior causes the expected failures; resolve environment failures before treating them as the red test cycle.
+- [x] **Step 3: Run the tests before implementation.** Run `npm run test:contracts` and `npm run test:db`. Confirm missing contracts/migration behavior causes the expected failures; resolve environment failures before treating them as the red test cycle.
 
-- [ ] **Step 4: Implement the schema and date contracts.** Use UUID primary keys, explicit required fields, and these SQL constraints:
+- [x] **Step 4: Implement the schema and date contracts.** Use UUID primary keys, explicit required fields, and these SQL constraints:
 
 ```sql
 CREATE TABLE vehicles (
@@ -254,7 +254,7 @@ interface ApiErrorBody {
 
 Define matching runtime Zod schemas, including dateRangeSchema, vehicleStatusSchema, createIssueSchema, updateIssueSchema, and dashboardResponseSchema. Require at least one field in an issue update. Set page defaults to 1, pageSize defaults to 20, and pageSize maximum to 100. UUID query/path values must validate as UUIDs. Issue descriptions are trimmed before checking 10–2000 characters.
 
-- [ ] **Step 5: Add repeatable sample data and verify the foundation.** Seed 8 vehicles, 60 runs, and 24 issues using stable UUIDs and an anchor JST date. Use INSERT ... ON CONFLICT DO NOTHING for existing records; do not delete or overwrite existing mutations. Include the edge conditions from the design and one open critical issue with the exact description `Seeded critical sensor fault`. The test database helper creates a uniquely named schema, applies migrations using its search_path, and drops only that generated schema during cleanup.
+- [x] **Step 5: Add repeatable sample data and verify the foundation.** Seed 8 vehicles, 60 runs, and 24 issues using stable UUIDs and an anchor JST date. Use INSERT ... ON CONFLICT DO NOTHING for existing records; do not delete or overwrite existing mutations. Include the edge conditions from the design and one open critical issue with the exact description `Seeded critical sensor fault`. The test database helper creates a uniquely named schema, applies migrations using its search_path, and drops only that generated schema during cleanup.
 
 Load .env for direct CLI execution of migrate/seed/reset scripts, while exported functions have no command-line side effects when imported by tests. The explicit reset command requires `--confirm-demo-data-reset`, a loopback database host, and the database name `fleet_ops`. It verifies these conditions before truncating only issues, test_runs, and vehicles, then runs seed in the same transaction. It preserves schema_migrations, uses no CASCADE, and is never called by normal startup. Exercise the reset implementation against an isolated fixture schema during tests, then document its effect on saved demo edits.
 
@@ -271,7 +271,7 @@ Run `npm run db:migrate`, `npm run db:seed`, both commands a second time, `npm r
 - Produces: `listTestRuns(pool: Pool, filters: TestRunFilters): Promise<Page<TestRun>>`, `listIssues(pool: Pool, filters: IssueFilters): Promise<Page<Issue>>`, `createIssue(pool: Pool, input: CreateIssueInput): Promise<Issue>`, `updateIssue(pool: Pool, id: string, input: UpdateIssueInput): Promise<Issue | null>`.
 - Define VehicleFilters with `search?`, `status?`, `page`, `pageSize`, `sort: "licensePlate" | "model" | "status"`, `direction: "asc" | "desc"`. Define TestRunFilters with `vehicleId`, optional `from/to`, `page`, `pageSize`. Define IssueFilters with optional `vehicleId/testRunId/severity/status` plus page/pageSize. All list queries use an ID tie-breaker; run/issue defaults sort newest first.
 
-- [ ] **Step 1: Write failing API tests.** Test health/readiness, each read route, invalid input, missing records, and actual writes. Include these regression tests:
+- [x] **Step 1: Write failing API tests.** Test health/readiness, each read route, invalid input, missing records, and actual writes. Include these regression tests:
 
 ```ts
 it("does not multiply completed distance when a run has several issues", async () => {
@@ -301,9 +301,9 @@ it("clears the persisted resolution timestamp when reopening an issue", async ()
 
 Include records at JST start, one millisecond before the start, one millisecond before the exclusive end, and at the exclusive end. Test zero-filled days, cancelled/in-progress exclusions, current-state card independence from the selected date range, invalid sort fields, negative pages, filtering totals, and stable pagination.
 
-- [ ] **Step 2: Run the API tests before implementation.** Run `npm run test:api`. Expect missing app/query behavior to fail. Confirm the PostgreSQL fixture is reachable.
+- [x] **Step 2: Run the API tests before implementation.** Run `npm run test:api`. Expect missing app/query behavior to fail. Confirm the PostgreSQL fixture is reachable.
 
-- [ ] **Step 3: Implement aggregate queries, reads, and request validation.** Completed-distance queries operate on test_runs without joining raw issues:
+- [x] **Step 3: Implement aggregate queries, reads, and request validation.** Completed-distance queries operate on test_runs without joining raw issues:
 
 ```sql
 SELECT COALESCE(SUM(distance_km), 0) AS distance_km, COUNT(*) AS run_count
@@ -321,7 +321,7 @@ Convert pg numeric/count results explicitly to JSON numbers and timestamps to UT
 
 Register the exact `/api` routes from the spec. Parse route/query/body input before executing queries. Search uses a parameterized ILIKE value; ordering uses a fixed SQL-column map. Reuse filtered WHERE clauses for both the count query and page query. Apply default date range only when both dashboard dates are absent; reject partial ranges.
 
-- [ ] **Step 4: Implement writes and error behavior.** Issue creation always starts in open status. Issue updates preserve unspecified fields, set updated_at to now(), set resolved_at to now() when entering resolved, preserve it when already resolved, and clear it when reopening:
+- [x] **Step 4: Implement writes and error behavior.** Issue creation always starts in open status. Issue updates preserve unspecified fields, set updated_at to now(), set resolved_at to now() when entering resolved, preserve it when already resolved, and clear it when reopening:
 
 ```sql
 UPDATE issues
@@ -339,7 +339,7 @@ RETURNING *;
 
 Return the joined Issue contract after writes. Missing mutation targets return 404. A foreign-key violation on issue creation returns a field-specific 400. Unexpected failures return a generic structured 500 and are logged on the server. Add a 404 handler for unknown /api routes before static web fallback. `/api/health` performs a short database query and returns 503 if unavailable. server.ts loads .env, starts the pool/listener, and closes both on SIGINT/SIGTERM.
 
-- [ ] **Step 5: Verify the API as an independent deliverable.** Run `npm run test:contracts`, `npm run test:db`, `npm run test:api`, and the API typecheck/build. Start the API and request /api/health, dashboard, and a paginated vehicle list. Expect JSON matching the contracts, correct fixture aggregates, and persisted updates. Commit with `feat: add validated fleet operations API`.
+- [x] **Step 5: Verify the API as an independent deliverable.** Run `npm run test:contracts`, `npm run test:db`, `npm run test:api`, and the API typecheck/build. Start the API and request /api/health, dashboard, and a paginated vehicle list. Expect JSON matching the contracts, correct fixture aggregates, and persisted updates. Commit with `feat: add validated fleet operations API`.
 
 ### Task 3: Deliver the overview and vehicle-detail experience
 
@@ -352,7 +352,7 @@ Return the joined Issue contract after writes. Missing mutation targets return 4
 - Produces: `OverviewPage`, `VehicleDetailPage`, `StatusBadge`, `StatePanel`, `formatJst(iso: string): string`, `formatDistance(km: number | null): string`.
 - Routes: `/` for overview, `/vehicles/:id` for details, `/issues` reserved for Task 4. Use React Router and keep the date range/filter state in URL query parameters where useful.
 
-- [ ] **Step 1: Scaffold the web workspace and write failing UI tests.** Create a Vite react-ts application in apps/web, set its package name to @fleet/web, and replace the template content. Configure jsdom/Testing Library and add semantic behavior tests. Verify the current-state labels remain visible when the historical date range changes, vehicle search/status filters update results, a detail link opens the expected vehicle, and a saved vehicle-status mutation reloads the visible value.
+- [x] **Step 1: Scaffold the web workspace and write failing UI tests.** Create a Vite react-ts application in apps/web, set its package name to @fleet/web, and replace the template content. Configure jsdom/Testing Library and add semantic behavior tests. Verify the current-state labels remain visible when the historical date range changes, vehicle search/status filters update results, a detail link opens the expected vehicle, and a saved vehicle-status mutation reloads the visible value.
 
 Test stale-request protection with two deferred responses:
 
@@ -376,9 +376,9 @@ it("keeps the latest date filter result when an earlier request finishes late", 
 
 Define deferred as a promise/resolver helper and makeDashboard as a complete contract-valid fixture with all DashboardResponse fields. Add tests for loading, empty vehicles, and an error panel whose retry action makes a new request.
 
-- [ ] **Step 2: Run focused web tests before implementation.** Run `npm run test:web`. Expect missing components/hooks to fail, rather than unrelated test-environment errors.
+- [x] **Step 2: Run focused web tests before implementation.** Run `npm run test:web`. Expect missing components/hooks to fail, rather than unrelated test-environment errors.
 
-- [ ] **Step 3: Implement typed requests and cancellation.** In useApi, create an AbortController for each request and invalidate the request in effect cleanup. Guard state updates with an active flag so mocked or already-delivered responses cannot overwrite a newer request. Reload increments a request key. apiRequest parses error envelopes and exposes field errors; never turn an unsuccessful response into a successful empty dataset.
+- [x] **Step 3: Implement typed requests and cancellation.** In useApi, create an AbortController for each request and invalidate the request in effect cleanup. Guard state updates with an active flag so mocked or already-delivered responses cannot overwrite a newer request. Reload increments a request key. apiRequest parses error envelopes and exposes field errors; never turn an unsuccessful response into a successful empty dataset.
 
 ```ts
 useEffect(() => {
@@ -396,13 +396,13 @@ useEffect(() => {
 
 Use Intl.DateTimeFormat with timeZone Asia/Tokyo for timestamps, and Intl.NumberFormat for counts/distances. Show an em dash for null distance with an accessible explanatory label. Configure Vite to proxy `/api` to http://127.0.0.1:3001 and use port 5173.
 
-- [ ] **Step 4: Implement the screens and accessible design.** Use the frontend-design skill once implementation prerequisites are approved. Build a consistent shell, three current-state cards, selected-period distance/run totals, Recharts daily/vehicle distance charts, and a searchable sortable vehicle table. Chart values and visible labels come directly from the dashboard response. Display chart zero states clearly.
+- [x] **Step 4: Implement the screens and accessible design.** Use the frontend-design skill once implementation prerequisites are approved. Build a consistent shell, three current-state cards, selected-period distance/run totals, Recharts daily/vehicle distance charts, and a searchable sortable vehicle table. Chart values and visible labels come directly from the dashboard response. Display chart zero states clearly.
 
 Vehicle details load /api/vehicles/:id and /api/test-runs?vehicleId=... with the chosen date range. Display run status, distance, driver snapshot, timestamp, and issueCount. Link run issues to `/issues?testRunId=...`. Updating operational status calls PATCH /api/vehicles/:id/status, disables submission while pending, announces success, and reloads details. A missing vehicle gets a meaningful page-level message and a link back to overview.
 
 Use native table semantics, labeled date/search/select fields, accessible button names, textual status labels, keyboard focus styling, and restrained severity colors. At narrow widths, scroll the tables inside their containers rather than the entire page.
 
-- [ ] **Step 5: Verify the two-screen deliverable.** Run `npm run test:web` and web typecheck/build. Start API + web with the seeded database, inspect overview and vehicle details at desktop and narrow widths, change filters, retry an intentional temporary API failure, and save a vehicle-status update. Confirm persistence after reload. Commit with `feat: add fleet overview and vehicle detail screens`.
+- [x] **Step 5: Verify the two-screen deliverable.** Run `npm run test:web` and web typecheck/build. Start API + web with the seeded database, inspect overview and vehicle details at desktop and narrow widths, change filters, retry an intentional temporary API failure, and save a vehicle-status update. Confirm persistence after reload. Commit with `feat: add fleet overview and vehicle detail screens`.
 
 ### Task 4: Deliver issue creation, triage, and reopening
 
@@ -414,7 +414,7 @@ Use native table semantics, labeled date/search/select fields, accessible button
 - Produces: `IssuesPage`, `IssueForm` with create/edit modes, and completed navigation between issues and vehicle details.
 - Create mode uses only CreateIssueInput; status updates happen through UpdateIssueInput after creation. A selected vehicle is a UI convenience, not a second persisted foreign key.
 
-- [ ] **Step 1: Write failing form and mutation tests.** Test vehicle/run selection, invalid trimmed description, creation, status/severity editing, server field errors, repeated-submit prevention, persistence-facing reload behavior, and reopening a resolved issue. Include this selection regression:
+- [x] **Step 1: Write failing form and mutation tests.** Test vehicle/run selection, invalid trimmed description, creation, status/severity editing, server field errors, repeated-submit prevention, persistence-facing reload behavior, and reopening a resolved issue. Include this selection regression:
 
 ```ts
 it("clears the selected run when the vehicle changes", async () => {
@@ -429,9 +429,9 @@ it("clears the selected run when the vehicle changes", async () => {
 
 Mock responses that include only the selected vehicle's runs. Assert the outgoing POST body has testRunId, issueType, description, and severity; it does not include vehicleId or server timestamps.
 
-- [ ] **Step 2: Run the issue tests before implementation.** Run `npm run test:web -- --testNamePattern="issue|selected run|reopen"`. Expect the new behavior tests to fail for missing implementation.
+- [x] **Step 2: Run the issue tests before implementation.** Run `npm run test:web -- --testNamePattern="issue|selected run|reopen"`. Expect the new behavior tests to fail for missing implementation.
 
-- [ ] **Step 3: Implement the issue list and validated forms.** Initialize filters from URL parameters, reset page when a filter changes, and preserve links back to the affected vehicle. Render status and severity separately. Provide creation/edit controls with labeled fields and keyboard-accessible dialogs or inline forms.
+- [x] **Step 3: Implement the issue list and validated forms.** Initialize filters from URL parameters, reset page when a filter changes, and preserve links back to the affected vehicle. Render status and severity separately. Provide creation/edit controls with labeled fields and keyboard-accessible dialogs or inline forms.
 
 When the vehicle changes, clear testRunId immediately, cancel stale run requests, and load runs for the selected vehicle. Require a selected run from the latest returned page/list before creation. For vehicles with more than one page of runs, provide pagination/search in the run selection instead of silently omitting older runs.
 
@@ -439,7 +439,7 @@ Use createIssueSchema and updateIssueSchema before submitting. Render validation
 
 The update status options are open, in_progress, and resolved; display readable English labels. Reopening a resolved issue must visibly remove its resolved timestamp after saving. Updating an issue does not automatically update its vehicle status.
 
-- [ ] **Step 4: Add and run the core browser test.** Create a Playwright setup that migrates/seeds an isolated test database schema, starts the API and web using that schema, and disposes it afterwards. The test uses accessible names:
+- [x] **Step 4: Add and run the core browser test.** Create a Playwright setup that migrates/seeds an isolated test database schema, starts the API and web using that schema, and disposes it afterwards. The test uses accessible names:
 
 ```ts
 test("a coordinator can resolve an issue and persist a vehicle status change", async ({ page }) => {
@@ -464,7 +464,7 @@ test("a coordinator can resolve an issue and persist a vehicle status change", a
 
 Use the deterministic seeded critical issue from Task 1 so the test selects a known record. Add a create-and-reload browser case using a unique English description.
 
-- [ ] **Step 5: Verify the complete operational workflow.** Run issue UI tests, API tests, and `npm run test:e2e`. In the browser, exercise creation, validation failure, resolution, reopening, vehicle navigation, and vehicle-status persistence. Inspect desktop and narrow layouts and keyboard navigation. Commit with `feat: add persisted issue management workflow`.
+- [x] **Step 5: Verify the complete operational workflow.** Run issue UI tests, API tests, and `npm run test:e2e`. In the browser, exercise creation, validation failure, resolution, reopening, vehicle navigation, and vehicle-status persistence. Inspect desktop and narrow layouts and keyboard navigation. Commit with `feat: add persisted issue management workflow`.
 
 ### Task 5: Deliver reproducible setup, bilingual evidence, and CI
 
@@ -476,11 +476,11 @@ Use the deterministic seeded critical issue from Task 1 so the test selects a kn
 - Produces: verified local setup commands, production same-origin behavior, CI configuration, a complete English/Japanese README, and a clear demo narrative.
 - Remote destination remains unspecified. Prepare reviewable local templates and work records; actual GitHub creation/publishing follows once the destination is known and authorized.
 
-- [ ] **Step 1: Write a production smoke test before final static-serving behavior.** Build the web/API, start the compiled server, request `/`, a direct `/vehicles/:id` URL, `/api/health`, and an unknown `/api/not-a-route`. Expect HTML for web navigation, readiness JSON for health, and a structured JSON 404 for the unknown API route. Confirm a JavaScript asset referenced by the index resolves successfully.
+- [x] **Step 1: Write a production smoke test before final static-serving behavior.** Build the web/API, start the compiled server, request `/`, a direct `/vehicles/:id` URL, `/api/health`, and an unknown `/api/not-a-route`. Expect HTML for web navigation, readiness JSON for health, and a structured JSON 404 for the unknown API route. Confirm a JavaScript asset referenced by the index resolves successfully.
 
-- [ ] **Step 2: Implement production serving and verify it.** Serve apps/web/dist from Express after registered API routes and their 404 handler. Only browser navigation receives index.html fallback. Keep environment configuration on the server. Run the production smoke test and correct any path differences between source and compiled directories.
+- [x] **Step 2: Implement production serving and verify it.** Serve apps/web/dist from Express after registered API routes and their 404 handler. Only browser navigation receives index.html fallback. Keep environment configuration on the server. Run the production smoke test and correct any path differences between source and compiled directories.
 
-- [ ] **Step 3: Add honest English workflow artifacts and CI.** The Issue template asks for business purpose and acceptance criteria. The PR template asks for resulting behavior, scope, verification, and screenshots when relevant. Record the actual task commits and meaningful review findings in documentation. Do not label self-review as an independent human review.
+- [x] **Step 3: Add honest English workflow artifacts and CI.** The Issue template asks for business purpose and acceptance criteria. The PR template asks for resulting behavior, scope, verification, and screenshots when relevant. Record the actual task commits and meaningful review findings in documentation. Do not label self-review as an independent human review.
 
 Configure GitHub Actions for push and pull_request with a PostgreSQL 17 service, health checks, setup-node with Node 24, npm caching, and the following verified command sequence:
 
@@ -496,7 +496,7 @@ npm run test:e2e
 
 Set DATABASE_URL to the CI PostgreSQL service. Database fixtures isolate schemas for the test process. Browser orchestration uses its own schema and explicit application ports; wait for health readiness rather than fixed sleeps. Preserve failure reports/screenshots as workflow artifacts. Pin Actions versions to verified release SHAs when authoring the workflow.
 
-- [ ] **Step 4: Finish and verify both README languages.** Replace design-phase labels with actual implementation status only after verification. Add application screenshots, exact prerequisites, the central demo flow, metric semantics, working setup/test commands, ER rationale, and limitations in both English and Japanese. Keep the existing native Japanese toggle and static architecture/ER images.
+- [x] **Step 4: Finish and verify both README languages.** Replace design-phase labels with actual implementation status only after verification. Add application screenshots, exact prerequisites, the central demo flow, metric semantics, working setup/test commands, ER rationale, and limitations in both English and Japanese. Keep the existing native Japanese toggle and static architecture/ER images.
 
 Verify the setup sequence against a fresh local database, preserving the developer's existing database:
 
@@ -513,7 +513,7 @@ If the verified local path uses installed PostgreSQL rather than Docker, documen
 
 Update diagrams to match the shipped component responsibilities and schema. The HTML uses the original architecture-diagram export toolbar and pinned CDN/SRI values. Inspect HTML and static SVG rendering in a browser. Verify README relative links, image targets, Japanese expansion, and metric translation consistency. The existing architecture HTML is a standalone artifact, not a live hosted demo.
 
-- [ ] **Step 5: Perform final verification and record limits accurately.** Run the full required checks once after the final changes: typecheck, lint, unit/integration tests, production build, browser workflow tests, and production smoke test. Request the independent code review prescribed by the chosen execution workflow; apply supported findings and rerun the checks affected by fixes. Commit with `docs: add verified setup, Japanese README, and GitHub workflow`.
+- [x] **Step 5: Perform final verification and record limits accurately.** Run the full required checks once after the final changes: typecheck, lint, unit/integration tests, production build, browser workflow tests, and production smoke test. Request the independent code review prescribed by the chosen execution workflow; apply supported findings and rerun the checks affected by fixes. Commit with `docs: add verified setup, Japanese README, and GitHub workflow`.
 
 Do not claim a live deployment, GitHub Issues/PRs, or hosted CI completion unless those actions actually occurred. Keep local completion and external publication status distinct in the handoff.
 

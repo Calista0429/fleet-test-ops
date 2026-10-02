@@ -1,7 +1,124 @@
-import {LineChart,Line,BarChart,Bar,XAxis,YAxis,CartesianGrid,Tooltip,ResponsiveContainer} from 'recharts';
-import type {DashboardResponse} from '@fleet/contracts';
-import {formatDistance} from '../lib/format';
-export function DistanceCharts({data}:{data:DashboardResponse}) {return <div className='chart-grid'>
- <section className='chart-panel'><h3>Daily test distance</h3><p>Completed runs by start date, Japan time</p><div className='chart' role='img' aria-label='Daily completed test distance in kilometers'><ResponsiveContainer width='100%' height='100%' minWidth={0}><LineChart data={data.distanceByDay} margin={{top:10,right:18,left:0,bottom:0}}><CartesianGrid stroke='#e3e9ef' vertical={false}/><XAxis dataKey='date' tickFormatter={date=>String(date).slice(5)} tickLine={false} axisLine={false} tick={{fontSize:12}}/><YAxis tickLine={false} axisLine={false} width={46} tick={{fontSize:12}}/><Tooltip formatter={value=>formatDistance(Number(value))}/><Line type='monotone' dataKey='distanceKm' name='Distance' stroke='#2365a2' strokeWidth={3} dot={{r:3}} isAnimationActive={false}/></LineChart></ResponsiveContainer></div><details className='chart-data'><summary>View daily values</summary><table><thead><tr><th scope='col'>Date (JST)</th><th scope='col'>Distance</th></tr></thead><tbody>{data.distanceByDay.map(day=><tr key={day.date}><th scope='row'>{day.date}</th><td>{formatDistance(day.distanceKm)}</td></tr>)}</tbody></table></details></section>
- <section className='chart-panel'><h3>Distance by vehicle</h3><p>Includes vehicles with no completed runs</p><div className='chart' role='img' aria-label='Completed test distance by vehicle in kilometers'><ResponsiveContainer width='100%' height='100%' minWidth={0}><BarChart data={data.distanceByVehicle} margin={{top:10,right:18,left:0,bottom:0}}><CartesianGrid stroke='#e3e9ef' vertical={false}/><XAxis dataKey='licensePlate' tickLine={false} axisLine={false} tick={{fontSize:11}} interval={0} tickFormatter={plate=>String(plate).replace('TEST-','')}/><YAxis tickLine={false} axisLine={false} width={46} tick={{fontSize:12}}/><Tooltip formatter={value=>formatDistance(Number(value))}/><Bar dataKey='distanceKm' name='Distance' fill='#0c7b7a' radius={[3,3,0,0]} isAnimationActive={false}/></BarChart></ResponsiveContainer></div><details className='chart-data'><summary>View vehicle values</summary><table><thead><tr><th scope='col'>Vehicle</th><th scope='col'>Distance</th></tr></thead><tbody>{data.distanceByVehicle.map(v=><tr key={v.vehicleId}><th scope='row'>{v.licensePlate}</th><td>{formatDistance(v.distanceKm)}</td></tr>)}</tbody></table></details></section>
- </div>;}
+import {
+  LineChart,
+  Line,
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+} from 'recharts';
+import type { DashboardResponse } from '@fleet/contracts';
+import { formatDistance } from '../lib/format';
+export function DistanceCharts({ data }: { data: DashboardResponse }) {
+  return (
+    <div className="chart-grid">
+      <section className="chart-panel">
+        <h3>Daily test distance</h3>
+        <p>Completed runs by start date, Japan time</p>
+        <div className="chart" role="img" aria-label="Daily completed test distance in kilometers">
+          <ResponsiveContainer width="100%" height="100%" minWidth={0}>
+            <LineChart
+              data={data.distanceByDay}
+              margin={{ top: 10, right: 18, left: 0, bottom: 0 }}
+            >
+              <CartesianGrid stroke="#e3e9ef" vertical={false} />
+              <XAxis
+                dataKey="date"
+                tickFormatter={(date) => String(date).slice(5)}
+                tickLine={false}
+                axisLine={false}
+                tick={{ fontSize: 12 }}
+              />
+              <YAxis tickLine={false} axisLine={false} width={46} tick={{ fontSize: 12 }} />
+              <Tooltip formatter={(value) => formatDistance(Number(value))} />
+              <Line
+                type="monotone"
+                dataKey="distanceKm"
+                name="Distance"
+                stroke="#2365a2"
+                strokeWidth={3}
+                dot={{ r: 3 }}
+                isAnimationActive={false}
+              />
+            </LineChart>
+          </ResponsiveContainer>
+        </div>
+        <details className="chart-data">
+          <summary>View daily values</summary>
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Date (JST)</th>
+                <th scope="col">Distance</th>
+              </tr>
+            </thead>
+            <tbody>
+              {data.distanceByDay.map((day) => (
+                <tr key={day.date}>
+                  <th scope="row">{day.date}</th>
+                  <td>{formatDistance(day.distanceKm)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </details>
+      </section>
+      <section className="chart-panel">
+        <h3>Distance by vehicle</h3>
+        <p>Includes vehicles with no completed runs</p>
+        <div
+          className="chart"
+          role="img"
+          aria-label="Completed test distance by vehicle in kilometers"
+        >
+          <ResponsiveContainer width="100%" height="100%" minWidth={0}>
+            <BarChart
+              data={data.distanceByVehicle}
+              margin={{ top: 10, right: 18, left: 0, bottom: 0 }}
+            >
+              <CartesianGrid stroke="#e3e9ef" vertical={false} />
+              <XAxis
+                dataKey="licensePlate"
+                tickLine={false}
+                axisLine={false}
+                tick={{ fontSize: 11 }}
+                interval={0}
+                tickFormatter={(plate) => String(plate).replace('TEST-', '')}
+              />
+              <YAxis tickLine={false} axisLine={false} width={46} tick={{ fontSize: 12 }} />
+              <Tooltip formatter={(value) => formatDistance(Number(value))} />
+              <Bar
+                dataKey="distanceKm"
+                name="Distance"
+                fill="#0c7b7a"
+                radius={[3, 3, 0, 0]}
+                isAnimationActive={false}
+              />
+            </BarChart>
+          </ResponsiveContainer>
+        </div>
+        <details className="chart-data">
+          <summary>View vehicle values</summary>
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Vehicle</th>
+                <th scope="col">Distance</th>
+              </tr>
+            </thead>
+            <tbody>
+              {data.distanceByVehicle.map((v) => (
+                <tr key={v.vehicleId}>
+                  <th scope="row">{v.licensePlate}</th>
+                  <td>{formatDistance(v.distanceKm)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </details>
+      </section>
+    </div>
+  );
+}
